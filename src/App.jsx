@@ -19,6 +19,10 @@ function App() {
     const queryMovies = await getMoviesByTitle(input);
     setMovies(queryMovies);
   }
+  
+  const handleStart = () => {
+    history.push('/start')
+  }
 
   console.log(movies);
   
@@ -71,6 +75,7 @@ function App() {
                         setFirstMovie(e.target.id)
                         setFirstMoviePic(e.target.src);
                         setFirstSelected(true)
+                        setInput('');
                       }}
                     >
                       <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
@@ -81,27 +86,41 @@ function App() {
             </>
           ) : (
             <>
-              <label htmlFor="firstMovie">
-                Now, select the second movie:
-                <br/>
-                <input
-                  type="text"
-                  name="secondMovie"
-                  id="secondMovie"
-                  placeholder="Star Wars..."
-                  value={ input }
-                  onChange={ (e) => {
-                    setInput(e.target.value)
-                  }}
-                />
-              </label>
-              <br/>
-              <button
-                type="button"
-                onClick={ handleButton }
-              >
-                Search
-              </button>
+              {
+                !secondSelected ?
+                (
+                  <>
+                    <label htmlFor="firstMovie">
+                      Now, select the second movie:
+                      <br/>
+                      <input
+                        type="text"
+                        name="secondMovie"
+                        id="secondMovie"
+                        placeholder="Star Wars..."
+                        value={ input }
+                        onChange={ (e) => {
+                          setInput(e.target.value)
+                        }}
+                      />
+                    </label>
+                    <br/>
+                    <button
+                      type="button"
+                      onClick={ handleButton }
+                    >
+                      Search
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={ handleStart }
+                  >
+                    Start
+                  </button>
+                )
+              }
               <div
                 className="movie-list"
               >
@@ -116,6 +135,7 @@ function App() {
                         setSecondMovie(e.target.id)
                         setSecondMoviePic(e.target.src)
                         setSecondSelected(true)
+                        setInput('');
                       }}
                     >
                       <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
