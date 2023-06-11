@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-poster {
+  margin: 10px;
+}
+
+.movie-poster img {
+  height: 480px;
+  width: 270px;
+}
+
+
