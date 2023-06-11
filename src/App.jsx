@@ -1,6 +1,4 @@
-// import { getMovieDetails, getCast } from './api';
-// import MovieDisplay from './components/MovieDisplay';
-// import MovieSelector from './components/MovieSelector';
+
 import { useState } from 'react';
 import './App.css'
 import { getMoviesByTitle } from './api';
@@ -15,6 +13,7 @@ function App() {
   const [firstMoviePic, setFirstMoviePic] = useState('')
   const [secondMovie, setSecondMovie] = useState(0)
   const [secondMoviePic, setSecondMoviePic] = useState('')
+  
 
   const handleButton = async () => {
     const queryMovies = await getMoviesByTitle(input);
