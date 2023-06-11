@@ -5,6 +5,22 @@
   text-align: center;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+}
+
+section img {
+  height: 240px;
+  margin: 10px;
+  width: 135px;
+}
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;

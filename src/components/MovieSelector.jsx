@@ -1,17 +1,37 @@
+import { useContext, useEffect, useState } from "react"
+import GameContext from "../context/GameContext";
+import { getMoviesByTitle } from "../api";
+
 export default function MovieSelector() {
+  const [input, setInput] = useState('');
+
+  const { setQuery, query, setMovies } = useContext(GameContext);
+
+  useEffect(() => {
+    setMovies(getMoviesByTitle(query))
+  }, [query, setMovies])
+
   return (
     <form>
-      <label htmlFor="">
+      <label htmlFor="firstMovie">
         Select the first movie:
         <br/>
-        <input type="text" name="firstMovie" id="firstMovie" />
+        <input
+          type="text"
+          name="firstMovie"
+          id="firstMovie"
+          placeholder="Avatar..."
+          value={ input }
+          onChange={ (e) => setInput(e.target.value) }
+        />
       </label>
       <br/>
-      <label htmlFor="">
-      Select the second movie:
-        <br/>
-        <input type="text" name="secondMovie" id="secondMovie" />
-      </label>
+      <button
+        type="button"
+        onClick={ () => setQuery(input) }
+      >
+        Search
+      </button>
     </form>
   )
 }
