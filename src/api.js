@@ -1,4 +1,4 @@
-import { API_KEY } from '../key';
+import { API_KEY, API_TOKEN } from '../key';
 
 export async function getMovieDetails(movieId) {
   const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
@@ -37,7 +37,7 @@ export async function getMoviesByTitle(searchInput) {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTI2MTg0OTFmY2U0OTFiZDU3MzAyZDc1NjAwNzhjYSIsInN1YiI6IjY0ODRhMWNjYzlkYmY5MDEzYTA2OWQzMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.goDELHPPfbGjQXVK2oAk3n-AlqiQaSvpoSQeQja_VqA'
+      Authorization: API_TOKEN,
     }
   };
 
