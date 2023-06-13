@@ -21,19 +21,26 @@ section img {
   width: 135px;
 }
 
-.movie-list {
+.movie-list, .star-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.movie-poster {
+.movie-poster, .star-poster {
   margin: 10px;
 }
 
 .movie-poster img {
   height: 480px;
-  width: 270px;
+}
+
+.game img {
+  height: 240px;
+}
+
+.star-poster img {
+  height: 180px;
 }
 
 
