@@ -9,13 +9,16 @@ export default function StarDisplay(props) {
       {
         (stars.length > 0) ? (
           stars.map((star) => (
-            <button
+            <div
               key={star.id}
               type="button"
               className="star-poster"
             >
-              <img src={`${imgPath}${star.profile_path}`} alt="" />
-            </button>
+              <button type="button">
+                <img src={`${imgPath}${star.profile_path}`} alt={star.name} id={star.id} />
+                <p>{star.name}</p>
+              </button>
+            </div>
           ))
         ) : ('')
       }

@@ -1,34 +1,26 @@
-import { useContext } from "react"
-// import { getCast } from "../api"
+import { useContext, useEffect, useState } from "react"
+import { getCast } from "../api"
 import GameContext from "../context/GameContext"
 import StarDisplay from "../components/StarDisplay"
 
 export default function Game() {
   const { state } = useContext(GameContext)
+  const [stars, setStars] = useState([])
 
-  // const getStars = async () => {
-  //   const data = await getCast();
-  //   return data;
-  // }
+  const getStars = async (movieId) => {
+    const data = await getCast(movieId);
+    setStars(data);
+  }
 
-  // const stars = getStars();
-  // console.log(stars);
+  useEffect(() => {
+    getStars(state.firstMovie);
+  })
 
   return (
-    <>
+    <div className="game">
       <h2>Game</h2>
       <img src={state.firstPic} />
-      <StarDisplay stars={ state.stars } />
-      {/* {
-        stars.map((star) => (
-          <div
-            key={star.id}
-            className="star-poster"
-          >
-            <img src={`${imgPath}${star.profile_path}`} alt="" />
-          </div>
-        ))
-      } */}
-    </>
+      <StarDisplay stars={ stars } />
+    </div>
   )
 }
