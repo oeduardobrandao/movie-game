@@ -4,7 +4,7 @@ import { getCast, getMoviesByTitle } from '../api';
 import Header from '../components/Header';
 import GameContext from '../context/GameContext';
 
-function Home() {
+export default function Home() {
   const imgPath = 'https://image.tmdb.org/t/p/w1280/';
   const noImg = 'https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg';
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ function Home() {
   }
 
   const getStars = async () => {
-    const starsData = await getCast(state.firstMovie);
-    (state.firstMovie) ? setState({ ...state, stars: starsData }) : console.log(starsData);
+    const starsData = await getCast(state.currentMovie);
+    (state.currentMovie) ? setState({ ...state, stars: starsData }) : console.log(starsData);
   }
 
   const handleButtonTwo = async () => {
@@ -30,30 +30,29 @@ function Home() {
   }
   
   const handleStart = async () => {
-    navigate('/game');
+    await getStars();
+    navigate('/movie');
   }
-
-  // console.log(state.movies);
   
   return (
     <>
       <Header />
       <section>
-        <img src={state.firstPic || noImg} alt="" />
-        <img src={state.secondPic || noImg} alt="" />
+        <img src={state.firstPic || noImg} alt="" className="movie-img-home" />
+        <img src={state.secondPic || noImg} alt="" className="movie-img-home" />
       </section>
       <form>
         {
           !state.isOneSelected
           ? (
             <>
-              <label htmlFor="firstMovie">
+              <label htmlFor="currentMovie">
               Select the first movie:
                 <br/>
                 <input
                   type="text"
-                  name="firstMovie"
-                  id="firstMovie"
+                  name="currentMovie"
+                  id="currentMovie"
                   placeholder="First movie..."
                   value={ state.input }
                   onChange={ (e) => {
@@ -81,14 +80,15 @@ function Home() {
                       onClick={ (e) => {
                         setState({
                           ...state,
-                          firstMovie: e.target.id,
+                          currentMovie: e.target.name,
                           firstPic: e.target.src,
                           isOneSelected: true,
                           input: '',
                         })
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
+                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id}
+                        name={JSON.stringify(movie)} />
                     </button>
                   )) : ('')
                 }
@@ -100,7 +100,7 @@ function Home() {
                 !state.isTwoSelected ?
                 (
                   <>
-                    <label htmlFor="firstMovie">
+                    <label htmlFor="currentMovie">
                       Now, select the second movie:
                       <br/>
                       <input
@@ -144,14 +144,14 @@ function Home() {
                       onClick={ (e) => {
                         setState({
                           ...state,
-                          secondMovie: e.target.id,
+                          secondMovie: e.target.name,
                           secondPic: e.target.src,
                           isTwoSelected: true,
                           input: '',
                         })
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
+                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} name={JSON.stringify(movie)} />
                     </button>
                   )) : ('')
                 }
@@ -163,5 +163,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

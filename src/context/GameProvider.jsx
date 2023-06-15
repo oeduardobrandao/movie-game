@@ -9,10 +9,12 @@ export default function GameProvider({ children }) {
     stars: [],
     isOneSelected: false,
     isTwoSelected: false,
-    firstMovie: 0,
-    secondMovie: 0,
+    currentMovie: {},
+    finalMovie: {},
+    currentStar: {},
     firstPic: '',
     secondPic: '',
+    steps: 0,
   })
 
   const contextValues = {
