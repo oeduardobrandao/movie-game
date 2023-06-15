@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { getCast, getMoviesByTitle } from '../api';
 import Header from '../components/Header';
 import GameContext from '../context/GameContext';
+import noImg from '../images/no-img.jpg';
+import Footer from '../components/Footer';
 
-function Home() {
-  const imgPath = 'https://image.tmdb.org/t/p/w1280/';
-  const noImg = 'https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg';
+export default function Home() {
   const navigate = useNavigate();
-
+  const imgPath = 'https://image.tmdb.org/t/p/w1280/';
   const { state, setState } = useContext(GameContext);
   
   const handleButton = async () => {
@@ -20,8 +20,8 @@ function Home() {
   }
 
   const getStars = async () => {
-    const starsData = await getCast(state.firstMovie);
-    (state.firstMovie) ? setState({ ...state, stars: starsData }) : console.log(starsData);
+    const starsData = await getCast(state.currentMovie);
+    (state.currentMovie) ? setState({ ...state, stars: starsData }) : console.log(starsData);
   }
 
   const handleButtonTwo = async () => {
@@ -30,31 +30,45 @@ function Home() {
   }
   
   const handleStart = async () => {
-    navigate('/game');
+    await getStars();
+    navigate('/movie');
   }
 
-  // console.log(state.movies);
+  const handleReset = () => {
+    setState({
+      input: '',
+      movies: [],
+      stars: [],
+      isOneSelected: false,
+      isTwoSelected: false,
+      currentMovie: {},
+      finalMovie: {},
+      currentStar: {},
+      firstPic: '',
+      secondPic: '',
+      steps: 0,
+    })
+  }
   
   return (
     <>
       <Header />
       <section>
-        <img src={state.firstPic || noImg} alt="" />
-        <img src={state.secondPic || noImg} alt="" />
+        <img src={state.firstPic || noImg} alt="" className="movie-img-home" />
+        <img src={state.secondPic || noImg} alt="" className="movie-img-home" />
       </section>
       <form>
         {
           !state.isOneSelected
           ? (
             <>
-              <label htmlFor="firstMovie">
-              Select the first movie:
+              <label htmlFor="currentMovie">
                 <br/>
                 <input
                   type="text"
-                  name="firstMovie"
-                  id="firstMovie"
-                  placeholder="First movie..."
+                  name="currentMovie"
+                  id="currentMovie"
+                  placeholder="Select the first movie..."
                   value={ state.input }
                   onChange={ (e) => {
                     setState({ ...state, input: e.target.value})
@@ -63,6 +77,7 @@ function Home() {
               </label>
               <br/>
               <button
+                className="form-btn"
                 type="button"
                 onClick={ handleButton }
               >
@@ -81,14 +96,16 @@ function Home() {
                       onClick={ (e) => {
                         setState({
                           ...state,
-                          firstMovie: e.target.id,
+                          currentMovie: e.target.name,
+                          firstMovie: e.target.name,
                           firstPic: e.target.src,
                           isOneSelected: true,
                           input: '',
                         })
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
+                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id}
+                        name={JSON.stringify(movie)} />
                     </button>
                   )) : ('')
                 }
@@ -100,14 +117,13 @@ function Home() {
                 !state.isTwoSelected ?
                 (
                   <>
-                    <label htmlFor="firstMovie">
-                      Now, select the second movie:
+                    <label htmlFor="currentMovie">
                       <br/>
                       <input
                         type="text"
                         name="secondMovie"
                         id="secondMovie"
-                        placeholder="Second movie..."
+                        placeholder="Now, select the second movie..."
                         value={ state.input }
                         onChange={ (e) => {
                           setState({ ...state, input: e.target.value})
@@ -116,6 +132,7 @@ function Home() {
                     </label>
                     <br/>
                     <button
+                      className="form-btn"
                       type="button"
                       onClick={ handleButtonTwo }
                     >
@@ -123,12 +140,23 @@ function Home() {
                     </button>
                   </>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={ handleStart }
-                  >
-                    Start
-                  </button>
+                  <>
+                    <button
+                      className="form-btn"
+                      type="button"
+                      onClick={ handleStart }
+                    >
+                      Start
+                    </button>
+                    <br />
+                    <button
+                      className="form-btn reset-btn"
+                      type="button"
+                      onClick={ handleReset }
+                    >
+                      Reset
+                    </button>
+                  </>
                 )
               }
               <div
@@ -144,14 +172,14 @@ function Home() {
                       onClick={ (e) => {
                         setState({
                           ...state,
-                          secondMovie: e.target.id,
+                          finalMovie: e.target.name,
                           secondPic: e.target.src,
                           isTwoSelected: true,
                           input: '',
                         })
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} />
+                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} name={JSON.stringify(movie)} />
                     </button>
                   )) : ('')
                 }
@@ -160,8 +188,7 @@ function Home() {
           )
         }
       </form>
+      <Footer />
     </>
   );
 }
-
-export default Home;

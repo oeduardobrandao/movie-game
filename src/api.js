@@ -21,7 +21,7 @@ export async function getStarMovies(starId) {
   const response = await fetch(url);
   const data = await response.json();
   // console.log(data);
-  return data;
+  return data.cast;
 }
 
 export async function getAllMovies() {
