@@ -10,6 +10,7 @@ export default function GameProvider({ children }) {
     isOneSelected: false,
     isTwoSelected: false,
     currentMovie: {},
+    firstMovie: {},
     finalMovie: {},
     currentStar: {},
     firstPic: '',

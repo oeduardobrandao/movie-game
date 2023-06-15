@@ -4,6 +4,7 @@ import { getCast, getMoviesByTitle } from '../api';
 import Header from '../components/Header';
 import GameContext from '../context/GameContext';
 import noImg from '../images/no-img.jpg';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -31,6 +32,22 @@ export default function Home() {
   const handleStart = async () => {
     await getStars();
     navigate('/movie');
+  }
+
+  const handleReset = () => {
+    setState({
+      input: '',
+      movies: [],
+      stars: [],
+      isOneSelected: false,
+      isTwoSelected: false,
+      currentMovie: {},
+      finalMovie: {},
+      currentStar: {},
+      firstPic: '',
+      secondPic: '',
+      steps: 0,
+    })
   }
   
   return (
@@ -80,6 +97,7 @@ export default function Home() {
                         setState({
                           ...state,
                           currentMovie: e.target.name,
+                          firstMovie: e.target.name,
                           firstPic: e.target.src,
                           isOneSelected: true,
                           input: '',
@@ -122,13 +140,23 @@ export default function Home() {
                     </button>
                   </>
                 ) : (
-                  <button
-                    className="form-btn"
-                    type="button"
-                    onClick={ handleStart }
-                  >
-                    Start
-                  </button>
+                  <>
+                    <button
+                      className="form-btn"
+                      type="button"
+                      onClick={ handleStart }
+                    >
+                      Start
+                    </button>
+                    <br />
+                    <button
+                      className="form-btn reset-btn"
+                      type="button"
+                      onClick={ handleReset }
+                    >
+                      Reset
+                    </button>
+                  </>
                 )
               }
               <div
@@ -144,7 +172,7 @@ export default function Home() {
                       onClick={ (e) => {
                         setState({
                           ...state,
-                          secondMovie: e.target.name,
+                          finalMovie: e.target.name,
                           secondPic: e.target.src,
                           isTwoSelected: true,
                           input: '',
@@ -160,6 +188,7 @@ export default function Home() {
           )
         }
       </form>
+      <Footer />
     </>
   );
 }

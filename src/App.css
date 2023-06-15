@@ -6,14 +6,26 @@
   text-align: center;
 }
 
+:root {
+  --primary: #0F172A;
+  --secondary: rgb(242, 242, 242);
+  --accent: rgb(227, 227, 49);
+}
+
+body {
+  background-color: var(--primary);
+  height: 100vh;
+  width: 100vw;
+}
+
 header {
   align-items: center;
-  background-color: black;
-  color: white;
+  background-color: var(--primary);
+  color: var(--secondary);
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 40px;
+  padding: 20px 5%;
 }
 
 header p {
@@ -21,37 +33,63 @@ header p {
   font-weight: 300;
 }
 
+.movie, .cast {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .movie-img-home {
   height: 240px;
   margin: 10px;
 }
 
+.movie-info, .cast-info {
+  background-color: var(--secondary);
+  border-radius: 20px;
+  box-shadow: rgba(94, 97, 100, 0.231) 10px 10px 30px;
+  margin: 20px;
+  max-width: 720px;
+  padding: 20px;
+}
+
+.movie-info h2, .cast-info h2 {
+  font-weight: 600;
+}
+
 .movie-list, .star-list {
+  color: var(--secondary);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .movie-hero, .star-hero {
-  height: 480px;
+  border-radius: 10px;
+  box-shadow: rgba(94, 97, 100, 0.231) 10px 10px 30px;
+  margin: 20px auto;
+  width: 50%;
 }
 
 .star-poster img, .movie-poster img {
-  height: 240px;
+  border-radius: 10px;
+  box-shadow: rgba(94, 97, 100, 0.231) 10px 10px 30px;
+  width: 100%;
 }
 
 .form-btn, input {
   appearance: none;
-  background-color: #FAFBFC;
+  background-color: var(--secondary);
   border: 1px solid rgba(27, 31, 35, 0.15);
-  border-radius: 6px;
+  border-radius: 1px;
   box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
   box-sizing: border-box;
   color: #24292E;
   cursor: pointer;
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 20px;
   list-style: none;
@@ -69,15 +107,16 @@ header p {
 }
 
 .form-btn {
-  background-color: black;
+  background-color: var(--accent);
   border: none;
-  color: white;
+  color: var(--primary);
 }
 
 .form-btn:hover {
-  background-color: #1d1d1d;
+  background-color: var(--secondary);
+  color: var(--primary);
   text-decoration: none;
-  transition-duration: 0.1s;
+  transition-duration: 0.3s;
 }
 
 .form-btn:disabled {
@@ -105,21 +144,36 @@ header p {
   display: none;
 }
 
+.reset-btn {
+  background-color: white;
+  border: solid 2px rgb(74, 74, 74);
+  color: black;
+}
+
 .movie-poster, .star-poster {
   appearance: none;
-  background-color: #FAFBFC;
+  background-color: transparent;
   border: none;
   border-radius: 10px;
   box-sizing: border-box;
-  color: #24292E;
+  color: var(--secondary);
   cursor: pointer;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   list-style: none;
+  margin: 4px;
+  min-width: 160px;
   padding: 4px;
+  width: 20%;
 }
 
-
-
+footer {
+  background-color: var(--primary);
+  bottom: 0;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  width: 100vw;
+}

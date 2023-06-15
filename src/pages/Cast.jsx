@@ -1,13 +1,15 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom";
 import { getStarMovies } from "../api"
 import GameContext from "../context/GameContext"
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 // import StarDisplay from "../components/StarDisplay"
 // import MovieDisplay from "../components/MovieDisplay"
 
 export default function Cast() {
   const { state, setState } = useContext(GameContext);
+  const myRef = useRef(null);
   const { currentStar, movies, steps } = state;
   const navigate = useNavigate();
   const imgPath = 'https://image.tmdb.org/t/p/w1280/';
@@ -24,15 +26,18 @@ export default function Cast() {
   }
 
   useEffect(() => {
-    setStarMovies(currentStar.id)
+    myRef.current.scrollIntoView();
+    setStarMovies(currentStar.id);
   }, [])
 
   return (
     <>
-      <Header />
+      <div ref={myRef}><Header /></div>
       <div className="cast">
-        <h2>{currentStar.name}</h2>
-        <img className="star-hero" src={`${imgPathStars}${currentStar.profile_path}`} />
+        <div className="cast-info">
+          <h2>{currentStar.name}</h2>
+          <img className="star-hero" src={`${imgPathStars}${currentStar.profile_path}`} />
+        </div>
         {
         (movies.length > 0) ? (
           <div className="movie-list">
@@ -51,6 +56,7 @@ export default function Cast() {
         ) : ('')
       }
       </div>
+      <Footer />
     </>
   )
 }
