@@ -17,11 +17,12 @@ header {
 }
 
 header p {
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 300;
 }
 
 .movie-img-home {
-  height: 280px;
+  height: 240px;
   margin: 10px;
 }
 
@@ -37,6 +38,87 @@ header p {
 
 .star-poster img, .movie-poster img {
   height: 240px;
+}
+
+.form-btn, input {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin-bottom: 5px;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 50%;
+  word-wrap: break-word;
+}
+
+.form-btn {
+  background-color: black;
+  border: none;
+  color: white;
+}
+
+.form-btn:hover {
+  background-color: #1d1d1d;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.form-btn:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.form-btn:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.form-btn:focus {
+  outline: 1px transparent;
+}
+
+.form-btn:before {
+  display: none;
+}
+
+.form-btn:-webkit-details-marker {
+  display: none;
+}
+
+.movie-poster, .star-poster {
+  appearance: none;
+  background-color: #FAFBFC;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 4px;
 }
 
 

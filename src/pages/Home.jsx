@@ -3,12 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { getCast, getMoviesByTitle } from '../api';
 import Header from '../components/Header';
 import GameContext from '../context/GameContext';
+import noImg from '../images/no-img.jpg';
 
 export default function Home() {
-  const imgPath = 'https://image.tmdb.org/t/p/w1280/';
-  const noImg = 'https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg';
   const navigate = useNavigate();
-
+  const imgPath = 'https://image.tmdb.org/t/p/w1280/';
   const { state, setState } = useContext(GameContext);
   
   const handleButton = async () => {
@@ -47,13 +46,12 @@ export default function Home() {
           ? (
             <>
               <label htmlFor="currentMovie">
-              Select the first movie:
                 <br/>
                 <input
                   type="text"
                   name="currentMovie"
                   id="currentMovie"
-                  placeholder="First movie..."
+                  placeholder="Select the first movie..."
                   value={ state.input }
                   onChange={ (e) => {
                     setState({ ...state, input: e.target.value})
@@ -62,6 +60,7 @@ export default function Home() {
               </label>
               <br/>
               <button
+                className="form-btn"
                 type="button"
                 onClick={ handleButton }
               >
@@ -101,13 +100,12 @@ export default function Home() {
                 (
                   <>
                     <label htmlFor="currentMovie">
-                      Now, select the second movie:
                       <br/>
                       <input
                         type="text"
                         name="secondMovie"
                         id="secondMovie"
-                        placeholder="Second movie..."
+                        placeholder="Now, select the second movie..."
                         value={ state.input }
                         onChange={ (e) => {
                           setState({ ...state, input: e.target.value})
@@ -116,6 +114,7 @@ export default function Home() {
                     </label>
                     <br/>
                     <button
+                      className="form-btn"
                       type="button"
                       onClick={ handleButtonTwo }
                     >
@@ -124,6 +123,7 @@ export default function Home() {
                   </>
                 ) : (
                   <button
+                    className="form-btn"
                     type="button"
                     onClick={ handleStart }
                   >
