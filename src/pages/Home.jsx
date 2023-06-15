@@ -1,15 +1,21 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCast, getMoviesByTitle } from '../api';
+import { animateScroll as scroll } from 'react-scroll'
 import Header from '../components/Header';
 import GameContext from '../context/GameContext';
-import noImg from '../images/no-img.jpg';
+import noImg1 from '../images/no-img-1.svg';
+import noImg2 from '../images/no-img-2.svg';
 import Footer from '../components/Footer';
 
 export default function Home() {
   const navigate = useNavigate();
   const imgPath = 'https://image.tmdb.org/t/p/w1280/';
   const { state, setState } = useContext(GameContext);
+
+  function scrollTo(y) {
+    scroll.scrollTo(y)
+  }
   
   const handleButton = async () => {
     const queryMovies = await getMoviesByTitle(state.input);
@@ -17,6 +23,7 @@ export default function Home() {
       ...state,
       movies: queryMovies,
     });
+    scrollTo(400);
   }
 
   const getStars = async () => {
@@ -54,8 +61,8 @@ export default function Home() {
     <>
       <Header />
       <section>
-        <img src={state.firstPic || noImg} alt="" className="movie-img-home" />
-        <img src={state.secondPic || noImg} alt="" className="movie-img-home" />
+        <img src={state.firstPic || noImg1} alt="" className="movie-img-home" />
+        <img src={state.secondPic || noImg2} alt="" className="movie-img-home" />
       </section>
       <form>
         {
@@ -123,7 +130,7 @@ export default function Home() {
                         type="text"
                         name="secondMovie"
                         id="secondMovie"
-                        placeholder="Now, select the second movie..."
+                        placeholder="Now, search for the second movie..."
                         value={ state.input }
                         onChange={ (e) => {
                           setState({ ...state, input: e.target.value})
@@ -142,19 +149,19 @@ export default function Home() {
                 ) : (
                   <>
                     <button
-                      className="form-btn"
-                      type="button"
-                      onClick={ handleStart }
-                    >
-                      Start
-                    </button>
-                    <br />
-                    <button
                       className="form-btn reset-btn"
                       type="button"
                       onClick={ handleReset }
                     >
                       Reset
+                    </button>
+                    <br />
+                    <button
+                      className="form-btn"
+                      type="button"
+                      onClick={ handleStart }
+                    >
+                      Start
                     </button>
                   </>
                 )

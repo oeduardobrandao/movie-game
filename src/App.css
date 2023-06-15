@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
+
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Londrina Solid';
   margin: 0;
   padding: 0;
   text-align: center;
@@ -88,12 +90,13 @@ header p {
   color: #24292E;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Londrina Solid';
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
   list-style: none;
   margin-bottom: 5px;
+  max-width: 340px;
   padding: 6px 16px;
   position: relative;
   transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
@@ -102,7 +105,7 @@ header p {
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
-  width: 50%;
+  width: 95%;
   word-wrap: break-word;
 }
 
@@ -176,4 +179,15 @@ footer {
   padding: 20px;
   position: fixed;
   width: 100vw;
+}
+
+footer a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+footer a:hover {
+  color: var(--accent);
+  text-decoration: none;
 }
