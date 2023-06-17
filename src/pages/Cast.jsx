@@ -1,11 +1,9 @@
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { getStarMovies } from "../api"
-import GameContext from "../context/GameContext"
+import { getStarMovies } from "../api";
+import GameContext from "../context/GameContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-// import StarDisplay from "../components/StarDisplay"
-// import MovieDisplay from "../components/MovieDisplay"
 
 export default function Cast() {
   const { state, setState } = useContext(GameContext);
@@ -16,14 +14,14 @@ export default function Cast() {
   const imgPathStars = 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/';
 
   const setStarMovies = async (star) => {
-    const data = await getStarMovies(star)
-    setState({ ...state, movies: data })
-  }
+    const data = await getStarMovies(star);
+    setState({ ...state, movies: data });
+  };
 
   const handleClick = (movie) => {
-    setState({ ...state, currentMovie: movie, steps: steps + 1 })
-    navigate('/movie')
-  }
+    setState({ ...state, currentMovie: movie, steps: steps + 1 });
+    navigate('/movie');
+  };
 
   useEffect(() => {
     myRef.current.scrollIntoView();
@@ -32,11 +30,11 @@ export default function Cast() {
 
   return (
     <>
-      <div ref={myRef}><Header /></div>
+      <div ref={ myRef }><Header /></div>
       <div className="cast">
         <div className="cast-info">
           <h2>{currentStar.name}</h2>
-          <img className="star-hero" src={`${imgPathStars}${currentStar.profile_path}`} />
+          <img className="star-hero" src={`${ imgPathStars }${ currentStar.profile_path }`} />
         </div>
         {
         (movies.length > 0) ? (
@@ -44,11 +42,11 @@ export default function Cast() {
             {
               movies.map((movie) => (
                 <button
-                  key={movie.id}
+                  key={ movie.id }
                   className="movie-poster"
                   onClick={ () => handleClick(JSON.stringify(movie)) }
                 >
-                  <img src={`${imgPath}${movie.poster_path}`} alt="" />
+                  <img src={`${ imgPath }${ movie.poster_path }`} alt={ movie.name } />
                 </button>
               ))
             }

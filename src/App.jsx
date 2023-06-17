@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Movie from './pages/Movie';
 import Cast from './pages/Cast';
-import ScoreBoard from './pages/ScoreBoard';
 import NotFound from './pages/NotFound';
 import './App.css'
 
@@ -12,8 +11,7 @@ function App() {
       <Route path="/" element={ <Home /> } />
       <Route path="/movie" element={ <Movie /> } />
       <Route path="/cast" element={ <Cast /> } />
-      <Route path="/score" element={ <ScoreBoard /> } />
-      <Route path="" element={ <NotFound /> } />
+      <Route path="*" element={ <NotFound /> } />
     </Routes>
   );
 }

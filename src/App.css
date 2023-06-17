@@ -191,3 +191,9 @@ footer a:hover {
   color: var(--accent);
   text-decoration: none;
 }
+
+.not-found {
+  color: var(--secondary);
+  margin: 30% auto;
+  text-align: center;
+}

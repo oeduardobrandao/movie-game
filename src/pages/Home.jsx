@@ -14,7 +14,7 @@ export default function Home() {
   const { state, setState } = useContext(GameContext);
 
   function scrollTo(y) {
-    scroll.scrollTo(y)
+    scroll.scrollTo(y);
   }
   
   const handleButton = async () => {
@@ -24,22 +24,22 @@ export default function Home() {
       movies: queryMovies,
     });
     scrollTo(400);
-  }
+  };
 
   const getStars = async () => {
     const starsData = await getCast(state.currentMovie);
     (state.currentMovie) ? setState({ ...state, stars: starsData }) : console.log(starsData);
-  }
+  };
 
   const handleButtonTwo = async () => {
     await getStars();
     await handleButton();
-  }
+  };
   
   const handleStart = async () => {
     await getStars();
     navigate('/movie');
-  }
+  };
 
   const handleReset = () => {
     setState({
@@ -54,15 +54,15 @@ export default function Home() {
       firstPic: '',
       secondPic: '',
       steps: 0,
-    })
-  }
+    });
+  };
   
   return (
     <>
       <Header />
       <section>
-        <img src={state.firstPic || noImg1} alt="" className="movie-img-home" />
-        <img src={state.secondPic || noImg2} alt="" className="movie-img-home" />
+        <img src={ state.firstPic || noImg1 } alt="Empty frame" className="movie-img-home" />
+        <img src={ state.secondPic || noImg2 } alt="Empty frame" className="movie-img-home" />
       </section>
       <form>
         {
@@ -78,7 +78,7 @@ export default function Home() {
                   placeholder="Select the first movie..."
                   value={ state.input }
                   onChange={ (e) => {
-                    setState({ ...state, input: e.target.value})
+                    setState({ ...state, input: e.target.value })
                   }}
                 />
               </label>
@@ -108,11 +108,11 @@ export default function Home() {
                           firstPic: e.target.src,
                           isOneSelected: true,
                           input: '',
-                        })
+                        });
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id}
-                        name={JSON.stringify(movie)} />
+                      <img src={`${ imgPath }${ movie.poster_path }` } alt="" id={ movie.id }
+                        name={ JSON.stringify(movie) } />
                     </button>
                   )) : ('')
                 }
@@ -133,7 +133,7 @@ export default function Home() {
                         placeholder="Now, search for the second movie..."
                         value={ state.input }
                         onChange={ (e) => {
-                          setState({ ...state, input: e.target.value})
+                          setState({ ...state, input: e.target.value});
                         }}
                       />
                     </label>
@@ -174,7 +174,7 @@ export default function Home() {
                   ? state.movies.map((movie) => (
                     <button
                       type="button"
-                      key={movie.id}
+                      key={ movie.id }
                       className="movie-poster"
                       onClick={ (e) => {
                         setState({
@@ -183,10 +183,10 @@ export default function Home() {
                           secondPic: e.target.src,
                           isTwoSelected: true,
                           input: '',
-                        })
+                        });
                       }}
                     >
-                      <img src={`${imgPath}${movie.poster_path}`} alt="" id={movie.id} name={JSON.stringify(movie)} />
+                      <img src={`${ imgPath }${ movie.poster_path }`} alt={ movie.name } id={ movie.id } name={ JSON.stringify(movie) } />
                     </button>
                   )) : ('')
                 }
